@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../modal_bottom_sheet.dart';
@@ -11,21 +10,18 @@ class MaterialWithModalsPageRoute<T> extends MaterialPageRoute<T> {
   /// The values of [builder], [maintainState], and [fullScreenDialog] must not
   /// be null.
   MaterialWithModalsPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
-  })  : assert(builder != null),
-        assert(maintainState != null),
-        assert(fullscreenDialog != null),
-        super(
+  }) : super(
           settings: settings,
           fullscreenDialog: fullscreenDialog,
           builder: builder,
           maintainState: maintainState,
         );
 
-  ModalBottomSheetRoute _nextModalRoute;
+  ModalBottomSheetRoute? _nextModalRoute;
 
   @override
   bool canTransitionTo(TransitionRoute<dynamic> nextRoute) {
@@ -38,7 +34,7 @@ class MaterialWithModalsPageRoute<T> extends MaterialPageRoute<T> {
   }
 
   @override
-  void didChangeNext(Route nextRoute) {
+  void didChangeNext(Route? nextRoute) {
     if (nextRoute is ModalBottomSheetRoute) {
       _nextModalRoute = nextRoute;
     }
@@ -52,7 +48,7 @@ class MaterialWithModalsPageRoute<T> extends MaterialPageRoute<T> {
   }
 
   @override
-  bool didPop(T result) {
+  bool didPop(T? result) {
     _nextModalRoute = null;
     return super.didPop(result);
   }
@@ -74,7 +70,7 @@ class MaterialWithModalsPageRoute<T> extends MaterialPageRoute<T> {
           fakeSecondaryAnimation,
           child,
         );
-        return _nextModalRoute.getPreviousRouteTransition(
+        return _nextModalRoute!.getPreviousRouteTransition(
           context,
           secondaryAnimation,
           defaultTransition,

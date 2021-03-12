@@ -251,9 +251,9 @@ class CupertinoListTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const CupertinoListTile({
-    Key key,
-    this.title,
-    this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
   }) : super(key: key);
 
   @override

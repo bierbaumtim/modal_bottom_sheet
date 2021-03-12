@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(platform: TargetPlatform.iOS),
       title: 'BottomSheet Modals',
       builder: (context, child) => WebFrame(
-        child: child,
+        child: child!,
       ),
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -86,7 +86,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   final String title;
 
